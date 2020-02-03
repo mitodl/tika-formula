@@ -1,0 +1,6 @@
+base:
+  '*':
+    - tika
+    
+    - tika.tests
+    

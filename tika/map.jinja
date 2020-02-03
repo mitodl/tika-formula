@@ -1,0 +1,14 @@
+{% set tika = salt.grains.filter_by({
+    'default': {
+        'pkgs': ['tika'],
+        'service': 'tika',
+        'conf_file': '/etc/tika/tika.conf',
+        'config': {
+            'key': 'value',
+        },
+    },
+    'Debian': {
+    },
+    'RedHat': {
+    },
+}, grain='os_family', merge=salt.pillar.get('tika'), base='default') %}

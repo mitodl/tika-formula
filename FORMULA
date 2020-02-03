@@ -1,0 +1,9 @@
+name: tika
+os: RedHat, CentOS, Ubuntu, Debian
+os_family: RedHat, Debian
+version: 202002
+release: 1
+summary: SaltStack Formula for building and configuring Tika from Apache
+description: SaltStack Formula for building and configuring Tika from Apache
+top_level_dir: tika
+recommended: 

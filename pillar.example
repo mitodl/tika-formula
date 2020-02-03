@@ -1,0 +1,7 @@
+# -*- mode: yaml -*-
+tika:
+  overrides:
+    pkg: tika
+    conf_file: /usr/local/etc/tika/tika.conf
+  config:
+    key: othervalue
