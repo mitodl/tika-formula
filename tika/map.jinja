@@ -1,21 +1,22 @@
 {% set tika = salt.grains.filter_by({
     'default': {
         'pkgs': [
-            'openjdk-8-jdk-headless',
-            'curl'
         ],
         'user': 'tika',
         'group': 'tika',
         'version': '1.23',
         'executable': '/opt/tika',
         'url': 'http://apache-mirror.8birdsvideo.com/tika/tika-server',
+        'hash_url': 'https://www.apache.org/dist/tika/tika-server',
         'host': '0.0.0.0',
         'port': 9998,
         'service': 'tika-server',
         'log_config_file': '/etc/tika/log4j_tika.xml'
     },
     'Debian': {
+      'pkgs': ['default-jdk-headless']
     },
     'RedHat': {
+      'pkgs': ['java-latest-openjdk-headless']
     },
 }, grain='os_family', merge=salt.pillar.get('tika:overrides'), base='default') %}

@@ -31,11 +31,14 @@ create_tika_directory:
     - group: {{ tika.user }}
 
 download_tika_jar_file:
-  cmd.run:
-    - name: '/usr/bin/curl -L -O {{ tika.url }}-{{ tika.version }}.jar'
+  file.managed:
+    - name: {{ tika.executable }}/tika-server.{{ tika.version }}.jar
+    - source: {{ tika.url }}-{{ tika.version }}.jar
+    - source_hash: {{ tika.hash_url }}-{{ tika.version }}.jar.sha512
     - user: {{ tika.user }}
     - group: {{ tika.user }}
-    - cwd: {{ tika.executable }}
+    - require_in:
+        - service: tika_service_running 
 
 create_log_directory_for_tika:
   file.directory:
@@ -58,11 +61,11 @@ create_tika_service_definition:
         tika_log_config_file: {{ tika.log_config_file }}
         tika_version: {{ tika.version }}
         heap_max: {{ heap_max }}
-    - require_in:
+    - require:
         - user: create_tika_user
-  cmd.run:
+  cmd.wait:
     - name: systemctl daemon-reload
-    - onchanges:
+    - watch:
         - file: create_tika_service_definition
-    - onchanges_in:
+    - require_in:
         - service: tika_service_running
