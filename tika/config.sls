@@ -4,12 +4,10 @@ include:
   - .install
   - .service
 
-tika-config:
+write_tika_log_config:
   file.managed:
-    - name: {{ tika.conf_file }}
-    - source: salt://tika/templates/conf.jinja
-    - template: jinja
+    - name: {{ tika.log_config_file }}
+    - source: salt://tika/files/log4j_tika.xml
+    - makedirs: True
     - watch_in:
       - service: tika_service_running
-    - require:
-      - pkg: tika
