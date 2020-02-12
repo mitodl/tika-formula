@@ -7,7 +7,7 @@ User={{ tika_user }}
 Group={{ tika_group }}
 WorkingDirectory={{ tika_path }}
 Type=exec
-ExecStart=/usr/bin/java -Dlog4j.configuration=file:{{ tika_log_config_file }} -jar {{ tika_path }}/tika-server-{{ tika_version }}.jar --host={{ tika_host }} --port={{ tika_port }} -spawnChild -JXmx{{ heap_max }}m -JDlog4j.configuration=file:{{ tika_log_config_file }}
+ExecStart=/usr/bin/java -Dlog4j.configuration=file:{{ tika_log_config_file }} -jar {{ tika_path }}/tika-server.{{ tika_version }}.jar --host={{ tika_host }} --port={{ tika_port }} -spawnChild -JXmx{{ heap_max }}m -JDlog4j.configuration=file:{{ tika_log_config_file }}
 SuccessExitStatus=143
 Restart=always
 KillSignal=SIGQUIT
