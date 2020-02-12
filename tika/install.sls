@@ -37,6 +37,9 @@ download_tika_jar_file:
     - source_hash: {{ tika.hash_url }}-{{ tika.version }}.jar.sha512
     - user: {{ tika.user }}
     - group: {{ tika.user }}
+    - require:
+        - user: create_tika_user
+        - group: create_tika_group
     - require_in:
         - service: tika_service_running 
 
